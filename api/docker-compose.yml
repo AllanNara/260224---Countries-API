@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  db:
+    container_name: postgres-db
+    image: postgres:14.8-alpine
+    ports:
+      - 5432:5432
+    volumes:
+      - ./volumes/postgres-db/:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    restart: "always"
+
+
+  pgAdmin:
+    depends_on:
+      - db
+    image: dpage/pgadmin4:6.17
+    ports:
+      - 80:80
+    volumes:
+      - ./volumes/pgadmin/:/var/lib/postgresql/data
+    environment:
+      - PGADMIN_DEFAULT_PASSWORD=123456
+      - PGADMIN_DEFAULT_EMAIL=admin@mail.com
+
+
+# volumes:
+#   postgres-db:
+#     external: true
