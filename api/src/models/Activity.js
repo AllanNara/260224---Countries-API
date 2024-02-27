@@ -9,21 +9,21 @@ module.exports = (sequelize) => {
     }, 
     difficulty: {
       type: DataTypes.INTEGER,
+      allowNull: false,
       validate: {
         max: 5,
         min: 1
       },
-      defaultValue: 1
     },
     duration: {
       type: DataTypes.INTEGER,
-      defaultValue: 0,
+      allowNull: false,
     },
-    seasion: {
+    season: {
       type: DataTypes.ENUM(["spring", "summer", "fall", "winter", "any"]),
       defaultValue: "any"
     }
   }, {
     timestamps: false
   });
-}
+};
