@@ -1,15 +1,30 @@
 const { Router } = require('express');
-// Importar todos los routers;
-// Ejemplo: const authRouter = require('./auth.js');
+const { Country } = require("../db.js");
 const activityRouter = require("./activity.routes.js");
 const countriesRouter = require("./countries.routes.js");
+const populationDB = require('../helpers/populationDatabase.js');
 
 const router = Router();
 
-// Configurar los routers
-// Ejemplo: router.use('/auth', authRouter);
 router.use("/countries", countriesRouter);
 router.use("/activity", activityRouter);
+
+router.get("/database/countries/seeds", async(req, res, next) => {
+  try {
+    const results = await Country.findAll();
+  
+    if(results.length) {
+      res.send("DATABASE ALREDY CHARGE!");
+      return
+    };
+
+    await populationDB()
+    res.send("DATABASE CHARGE SUCCESSFULLY");
+  
+  } catch (error) {
+    next(error)
+  }
+});
 
 
 module.exports = router;

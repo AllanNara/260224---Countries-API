@@ -3,15 +3,19 @@ const { Country } = require("../db.js")
 
 const router = Router();
 
-router.get("/", (req, res, next) => {
+router.get("/", async (req, res, next) => {
+  const { name } = req.query;
   try {
-
+    if(!name) {
+      const countries = await Country.findAll();
+      res.json({status: "success", code: 200, payload: countries })
+    }
   } catch (error) {
     next(error)
   }
 });
 
-router.get("/:cid", (req, res, next) => {
+router.get("/:cid", async (req, res, next) => {
   try {
 
   } catch (error) {
