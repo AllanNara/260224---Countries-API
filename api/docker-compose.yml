@@ -26,6 +26,6 @@ services:
       - PGADMIN_DEFAULT_EMAIL=admin@mail.com
 
 
-volumes:
-  postgres-db:
-    external: false
+# volumes:
+#   postgres-db:
+#     external: false

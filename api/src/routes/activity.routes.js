@@ -17,11 +17,11 @@ router.post("/", async(req, res, next) => {
   };
 
   try {
-    const newActivity = await Activity.create({ name, difficulty, duration, season });
+    const newActivity = await Activity.create({ name, difficulty, duration, season: season.toUpperCase() });
 
     const countriesFound = [];
-    for (const position of countries) {
-      let country = await Country.findByPk(countries[position]);
+    for (const countryId of countries) {
+      let country = await Country.findByPk(countryId);
       countriesFound.push(country)
     }
 
